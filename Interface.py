@@ -204,23 +204,12 @@ while running:
                             f.write(f'{state_start} -> {state_goal}\n')
                             for state in path:
                                 f.write(str(state)+'\n')
-    
-        # if choose_algorithm != "":
-        #     if(Excute_algorithm(choose_algorithm, state_start, state_goal) == None):
-        #         font = pg.font.SysFont('Arial', 30)
-        #         txt_surface = font.render("No Path", True, 'black')
-        #         screen.blit(txt_surface, ((width_screen - txt_surface.get_width()) // 2, 10))
-        #     else:
-        #         path,time,step,cost = Excute_algorithm(choose_algorithm, state_start, state_goal)
-        #         Draw_Frame_Info(choose_algorithm,time,step,cost)
-        #         export_algorithm = choose_algorithm
-        #         choose_algorithm = ''
-        #         index_state = 0
-        # print(choose_algorithm,len(path))
-        if index_state < len(path):
-            state_current = path[index_state]
-            draw_frame(x_current_state,y_current_state,'State Current',state_current) 
-            index_state += 1
+
+                                
+    if index_state < len(path):
+        state_current = path[index_state]
+        draw_frame(x_current_state,y_current_state,'State Current',state_current) 
+        index_state += 1
     pg.display.flip()
     pg.time.wait(300)
 pg.display.quit()

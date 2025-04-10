@@ -371,7 +371,7 @@ def Excute_algorithm(name_algorithm, state_start, state_goal):
         'STHB': STHB,
         'SA': SA,
         'BEAM': lambda s, g: BeamSearch(s, g, beam_width=3),
-        'And-Or':AndOrSearch
+        #'And-Or':AndOrSearch
     }
 
     path = algorithms[name_algorithm](state_start, state_goal)
