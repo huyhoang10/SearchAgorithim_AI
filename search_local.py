@@ -44,24 +44,32 @@ def Heristic(n_state):
     return sum(abs(Pos(n_state.index(i))[0] - Pos(GOAL_STATE.index(i))[0]) +
                abs(Pos(n_state.index(i))[1] - Pos(GOAL_STATE.index(i))[1])
                for i in n_state if i != '')
-def SHC(state_start, GOAL_STATE): #simple Hill climbing
+
+
+def SHC(state_start, GOAL_STATE):  # Simple Hill Climbing
     time_start = time.time()
     path = []
     state_current = state_start
     path.append(state_current)
+
     while True:
-        if state_start == GOAL_STATE:
-            time_execute = round(time.time() - time_start,4)
-            return path,time_execute
-        else:
-            new_state = state_current.copy()
-            for state in Move(state_current):
-                if Heristic(state) < Heristic(state_current):
-                    new_state = state
-                    path.append(state)
-            if new_state == state_current:
-                return None,None
-            state_current = new_state
+        if state_current == GOAL_STATE:
+            time_execute = round(time.time() - time_start, 10)
+            return path, time_execute
+
+        neighbors = Move(state_current)
+        better_state = None
+        for state in neighbors:
+            if Heristic(state) < Heristic(state_current):
+                if better_state is None or Heristic(state) < Heristic(better_state):
+                    better_state = state
+    
+        if better_state is None:  # no better neighbor
+            time_execute = round((time.time() - time_start), 10)
+            return [], time_execute
+
+        state_current = better_state
+        path.append(state_current)
 
 def SAHC(state_start, GOAL_STATE): #Steepest-Ascent hill climbing
     time_start = time.time()
@@ -70,7 +78,7 @@ def SAHC(state_start, GOAL_STATE): #Steepest-Ascent hill climbing
     path.append(state_current)
     while True:
         if state_current == GOAL_STATE:
-            time_execute = round(time.time() - time_start,4)
+            time_execute = round(time.time() - time_start,10)
             return path,time_execute
         else:
             new_state = min(Move(state_current), key=lambda state: Heristic(state))
@@ -78,7 +86,8 @@ def SAHC(state_start, GOAL_STATE): #Steepest-Ascent hill climbing
                 state_current = new_state
                 path.append(new_state)
             else: 
-                return None,None
+                time_execute = round(time.time() - time_start,10)
+                return [],time_execute
             
             
 def STHB(state_start,GOAL_STATE): # leo doi ngau nhien
@@ -88,13 +97,14 @@ def STHB(state_start,GOAL_STATE): # leo doi ngau nhien
     path.append(state_current)
     while True:
         if state_current == GOAL_STATE:
-            time_execute = round(time.time() - time_start,4)
+            time_execute = round(time.time() - time_start,10)
             return path,time_execute
         else:
             neighbord = Move(state_current)
             while True:
                 if len(neighbord) == 0:
-                    return None,None
+                    time_execute = round(time.time() - time_start,10)
+                    return [],time_execute  
                 new_state = neighbord.pop(random.randint(0,len(neighbord)-1))
                 if Heristic(new_state) < Heristic(state_current):
                     state_current = new_state
