@@ -15,32 +15,33 @@ Xây dựng một chương trình đầy đủ thuật toán
 - Chi phí: mỗi hành động có giá thành = 1
 ### 2.1. Các thuật toán tìm kiếm không có thông tin
 - 2.1.1. BFS
-![alt text](BFS.gif)
+![alt text](anh_gif/bfs.gif)
 - 2.1.2. DFS
-![alt text](DFS.gif)
+![alt text](anh_gif/dfs.gif)
 - 2.1.3. UCS
-![alt text](UCS.gif)
+![alt text](anh_gif/ucs.gif)
 - 2.1.4. IDS
-![alt text](IDS.gif)
+![alt text](anh_gif/iddfs.gif)
 - So sánh hiệu suất về thời gian:
-![alt text](image.png)
-### 2.2. Các thuật toán tìm kiếm  có thông tin
-- 2.2.1. Simple hill climbing
 
-- 2.2.2. Stochastic hill climbing
-
-- 2.2.3. Steepest Ascent hill climbing
-
-- 2.2.4. Beam Search
-
-- 2.2.5. Generate Seach
-
+### 2.2. Các thuật toán tìm kiếm có thông tin
+- 2.2.1. Greedy
+![alt text](anh_gif/greedy.gif)
+- 2.2.2. A*
+![alt text](anh_gif/astar.gif)
+- 2.2.3. IDA*
+![alt text](anh_gif/ida.gif)
 ### 2.3. Các thuật toán tìm kiếm cục bộ
-- 2.3.1. Greedy
-
-- 2.3.2. A*
-
-- 2.3.3. IDA*
+- 2.3.1. Simple hill climbing
+![alt text](anh_gif/shc.gif)
+- 2.3.2. Stochastic hill climbing
+![alt text](anh_gif/sthb.gif)
+- 2.3.3. Steepest Ascent hill climbing
+![alt text](anh_gif/sahc.gif)
+- 2.3.4. Beam Search
+![alt text](anh_gif/beam.gif)
+- 2.3.5. Generate Seach
+![alt text](anh_gif/ga.gif)
 
 ### 2.4. Các thuật toán tìm kiếm trong môi trường phức tạp
 - 2.4.1. Non-Observe
@@ -48,7 +49,7 @@ Xây dựng một chương trình đầy đủ thuật toán
 - 2.4.2. Partial-Observe
 
 - 2.4.3. AndOr
-
+![alt text](anh_gif/andor.gif)
 ### 2.5. Các thuật toán tìm kiếm trong môi trường ràng buộc
 - 2.5.1. Checked
 

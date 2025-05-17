@@ -1,8 +1,14 @@
 import pygame as pg
 from SearchAlgorithm import Excute_algorithm
+import os
 
 pg.init()
 clock = pg.time.Clock()
+
+# Tạo thư mục 'bfs' nếu chưa tồn tại
+if not os.path.exists("sthb"):
+    os.makedirs("sthb")
+frame_count = 0
 
 width_screen,height_screen = 1020,700
 screen = pg.display.set_mode([width_screen,height_screen])
@@ -11,18 +17,18 @@ running = True
 color_frame = (249,212,212)
 color_button = (152,112,112)
 # setup begin
-state_start = [None]*9
+state_start = [1,8,2,'',4,3,7,6,5]#[1,2,3,4,5,6,'',7,8]
 state_goal = [1,2,3,4,5,6,7,8,'']
 num_start_state = 0
 num_goal_state = 0
-name_algorithm = ['DFS','BFS','UCS','IDS','GREEDY','A*','IDA*','SHC','SAHC','STHB','SA','BEAM','GA','And-Or','non_observe','partial_observe']
+name_algorithm = ['BFS','DFS','UCS','IDS','GREEDY','A*','IDA*','SHC','SAHC','STHB','BEAM','GA','And-Or','Par_Obs','Non_Obs','Check','Backtrack','AC3','QLearning']#,'non_observe','partial_observe']
 name_button_system = ['Clear','Reset','Export']
-x_button_algorithm,y_button_algorithm = 70,400
+x_button_algorithm,y_button_algorithm = 50,400
 x_button_system,y_button_system = 550,574
 x_start_state,y_start_state = 70,100
 x_goal_state,y_goal_state = 690,100
 x_current_state,y_current_state = 380,100
-width_button, height_button = 100,50
+width_button, height_button = 80,40
 edge_cell = 80
 size_frame_info = [70,550,400,100]
 
@@ -64,7 +70,7 @@ def draw_frame(x,y,text,state = ['','','','','','','','','']):
 
 def draw_button(x,y,text):
     pg.draw.rect(screen,color_button,[x,y,width_button,height_button])
-    font = pg.font.SysFont('Arial',25)
+    font = pg.font.SysFont('Arial',20)
     text_surface = font.render(text,True,'White')
     text_width,text_height = text_surface.get_size() 
     text_x = x+(width_button-text_width)//2
@@ -96,7 +102,7 @@ def Draw_Frame_Info(name_algorithm = "Algorithm",time=0,cost=0):
 
 # draw state
 def Draw_UI():
-    draw_frame(x_start_state,y_start_state,"Start State")
+    draw_frame(x_start_state,y_start_state,"Start State",state_start)
     draw_frame(x_goal_state,y_goal_state,"Goal State",state_goal)
     draw_all_button(x_button_algorithm,y_button_algorithm,name_algorithm)
     draw_all_button(x_button_system,y_button_system,name_button_system,1)
@@ -128,31 +134,19 @@ while running:
             
             mouse_x, mouse_y = event.pos
             
-            for i in range(9):  # Duyệt qua 9 ô trong mỗi bảng
-                col, row = Pos(i)
-                x, y = x_start_state + 5 + col * (edge_cell + 5), y_start_state + 5 + row * (edge_cell + 5)  # Tọa độ trong "Start State", 5 is distance 2 cell
+            # for i in range(9):  # Duyệt qua 9 ô trong mỗi bảng
+            #     col, row = Pos(i)
+            #     x, y = x_start_state + 5 + col * (edge_cell + 5), y_start_state + 5 + row * (edge_cell + 5)  # Tọa độ trong "Start State", 5 is distance 2 cell
                 
-                # Kiểm tra nếu chuột nằm trong ô
-                if x <= mouse_x <= x + edge_cell and y <= mouse_y <= y + edge_cell:
-                    if state_start[i] == None:
-                        num_start_state += 1
-                        pg.draw.rect(screen,'White',[x,y,edge_cell,edge_cell])
-                        draw_text_on_cel(x,y,edge_cell,edge_cell,num_start_state)
-                        state_start[i] = num_start_state
-                        if num_start_state == 8:    
-                            state_start[state_start.index(None)] = ''
-                            
-                # # choose goal_state
-                # x, y = x_goal_state + 5 + col * (edge_cell + 5), y_goal_state + 5 + row * (edge_cell + 5)  # Tọa độ trong "Goal State"
-                # if x <= mouse_x <= x + edge_cell and y <= mouse_y <= y + edge_cell:
-                #     if state_goal[i] == None:
-                #         num_goal_state += 1
-                #         pg.draw.rect(screen,'White',[x,y,edge_cell,edge_cell])
-                #         draw_text_on_cel(x,y,edge_cell,edge_cell,num_goal_state)
-                #         pg.display.update()
-                #         state_goal[i] = num_goal_state
-                #         if num_goal_state == 8:
-                #             state_goal[state_goal.index(None)] = ""
+            #     # Kiểm tra nếu chuột nằm trong ô
+            #     if x <= mouse_x <= x + edge_cell and y <= mouse_y <= y + edge_cell:
+            #         if state_start[i] == None:
+            #             num_start_state += 1
+            #             pg.draw.rect(screen,'White',[x,y,edge_cell,edge_cell])
+            #             draw_text_on_cel(x,y,edge_cell,edge_cell,num_start_state)
+            #             state_start[i] = num_start_state
+            #             if num_start_state == 8:    
+            #                 state_start[state_start.index(None)] = ''
 
             # choose algorithm
             for i in range(len(name_algorithm)):
@@ -188,7 +182,6 @@ while running:
                         stop_execution = True  # Dừng thuật toán ngay lập tức
                         screen.fill('White')
                         state_start = [None] * 9
-                        #state_goal = [None] * 9
                         num_start_state = 0
                         num_goal_state = 0
                         Draw_UI()
@@ -212,6 +205,9 @@ while running:
         draw_frame(x_current_state,y_current_state,'State Current',state_current) 
         index_state += 1
     pg.display.update()
+    frame_count += 1
+    filename = f"sthb/frame_{frame_count:03d}.png"  # frame_000.png, frame_001.png, ...
+    #pg.image.save(screen, filename)
     pg.time.wait(300)
 pg.display.quit()
 
