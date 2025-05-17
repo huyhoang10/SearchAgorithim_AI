@@ -6,6 +6,7 @@ from search_Information import *
 from search_local import *
 from search_complexEnveroment import *
 from search_constrait import *
+from q_learning import Q_learning
 GOAL_STATE = [1, 2, 3, 4, 5, 6, 7, 8, ""]
 
 def Excute_algorithm(name_algorithm, start_state, goal_state):
@@ -29,6 +30,7 @@ def Excute_algorithm(name_algorithm, start_state, goal_state):
     'BEAM': BeamSearch(start_state, goal_state, beam_width=3), # Beam Search
     'GA': genetic_algorithm(start_state, goal_state),  # Genetic Algorithm
     'And-Or': AndOrSearch(start_state, goal_state),    # And-Or Graph Search
+    'QLearning':Q_learning(start_state,[],0,100)
     }
     path,time_execute = algorithms[name_algorithm]
     return path,time_execute
@@ -98,25 +100,3 @@ def Heristic(n_state):
 # R(s,a) :-1 cho mỗi bước, 100 khi đến đích
 # gama: hệ số chiết khấu gán 0.5
 # 
-
-def Q_value(new_state):
-    p = 0.8
-    gama = 0.5
-    r_sa = -1  # khi khong dung trang thai dich, moi buoc di them = -1
-    if new_state == GOAL_STATE:
-        r_sa = 100 # gia tri phan thuong khi di den dich
-    v_snew = -manhattan_distance(new_state)
-    return r_sa + gama*p*v_snew
-def Q_learning(state,path):
-    path.append(state)
-    if state == tuple(GOAL_STATE):
-        return path
-    set_new_state = {}
-    for new_state in Move(state):
-        if new_state in path:
-            continue
-        else:
-            set_new_state[tuple(new_state)] = Q_value(new_state)
-    state = max(set_new_state,key=set_new_state.get) # lay state co Q_value lon nhat
-    print(state)
-    return Q_learning(state,path)

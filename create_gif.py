@@ -2,9 +2,9 @@ from PIL import Image
 import os
 
 # Đường dẫn thư mục nguồn và đích
-source_folder = "andor"
+source_folder = "qlearning"
 output_folder = "anh_gif"
-output_path = os.path.join(output_folder, "andor.gif")
+output_path = os.path.join(output_folder, "qlearning.gif")
 
 # Tạo thư mục lưu GIF nếu chưa có
 os.makedirs(output_folder, exist_ok=True)

@@ -6,8 +6,8 @@ pg.init()
 clock = pg.time.Clock()
 
 # Tạo thư mục 'bfs' nếu chưa tồn tại
-if not os.path.exists("sthb"):
-    os.makedirs("sthb")
+if not os.path.exists("qlearning"):
+    os.makedirs("qlearning")
 frame_count = 0
 
 width_screen,height_screen = 1020,700
@@ -206,8 +206,8 @@ while running:
         index_state += 1
     pg.display.update()
     frame_count += 1
-    filename = f"sthb/frame_{frame_count:03d}.png"  # frame_000.png, frame_001.png, ...
-    #pg.image.save(screen, filename)
+    filename = f"qlearning/frame_{frame_count:03d}.png"  # frame_000.png, frame_001.png, ...
+    pg.image.save(screen, filename)
     pg.time.wait(300)
 pg.display.quit()
 

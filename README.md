@@ -45,20 +45,21 @@ Xây dựng một chương trình đầy đủ thuật toán
 
 ### 2.4. Các thuật toán tìm kiếm trong môi trường phức tạp
 - 2.4.1. Non-Observe
-
+![alt text](anh_tinh/non_obsebve1.png)
+![alt text](anh_tinh/non_observe2.png)
 - 2.4.2. Partial-Observe
-
+![alt text](anh_tinh/partial_observe.png)
+![alt text](anh_tinh/partial_observe2.png)
 - 2.4.3. AndOr
 ![alt text](anh_gif/andor.gif)
 ### 2.5. Các thuật toán tìm kiếm trong môi trường ràng buộc
 - 2.5.1. Checked
-
+![alt text](anh_tinh/check.png)
 - 2.5.2. BackTracking
-
+![alt text](anh_tinh/Backtracking.png)
 - 2.5.3. AC-3
-
+![alt text](anh_tinh/AC3.png)
 ### 2.6. Q-Learning
-
+![alt text](anh_gif/qlearning.gif)
 
 ## 3. Kết luận
-Dự án đã thử nghiệm và so sánh hiệu suất của các thuật toán tìm kiếm không có thông tin và có thông tin trên trò chơi 8 ô chữ. Kết quả cho thấy thuật toán **A*** mang lại hiệu suất tốt nhất với thời gian trung bình 0.8 giây. Các thuật toán khác cũng cho thấy tiềm năng trong các trường hợp cụ thể, đặc biệt khi dữ liệu đã được sắp xếp hoặc có thông tin heuristic hỗ trợ. Dự án có thể được mở rộng bằng cách áp dụng thêm các thuật toán nâng cao hoặc tối ưu hóa hiệu suất trên các tập dữ liệu lớn hơn.

@@ -35,24 +35,55 @@ def manhattan_distance(state):
 # gama: hệ số chiết khấu gán 0.5
 # 
 
+# def Q_value(new_state):
+#     p = 0.8
+#     gama = 0.5
+#     r_sa = -1  # khi khong dung trang thai dich, moi buoc di them = -1
+#     if new_state == GOAL_STATE:
+#         r_sa = 100 # gia tri phan thuong khi di den dich
+#     v_snew = -manhattan_distance(new_state)
+#     return r_sa + gama*p*v_snew
+# def Q_learning(state,path):
+#     path.append(state)
+#     if state == tuple(GOAL_STATE):
+#         return path
+#     set_new_state = {}
+#     for new_state in Move(state):
+#         if new_state in path:
+#             continue
+#         else:
+#             set_new_state[tuple(new_state)] = Q_value(new_state)
+#     state = max(set_new_state,key=set_new_state.get) # lay state co Q_value lon nhat
+#     print(state)
+#     return Q_learning(state,path)
+
+
 def Q_value(new_state):
     p = 0.8
     gama = 0.5
-    r_sa = -1  # khi khong dung trang thai dich, moi buoc di them = -1
+    r_sa = -1  # phần thưởng mặc định cho mỗi bước
     if new_state == GOAL_STATE:
-        r_sa = 100 # gia tri phan thuong khi di den dich
+        r_sa = 100  # phần thưởng nếu đến đích
     v_snew = -manhattan_distance(new_state)
-    return r_sa + gama*p*v_snew
-def Q_learning(state,path):
+    return r_sa + gama * p * v_snew
+
+def Q_learning(state, path, depth=0, max_depth=50, visited=None):
+    if visited is None:
+        visited = set()
     path.append(state)
-    if state == tuple(GOAL_STATE):
-        return path
+    visited.add(tuple(state))  # lưu trạng thái đã đi
+
+    if state == GOAL_STATE:
+        return path,None
+    if depth >= max_depth:
+        return path,0
     set_new_state = {}
     for new_state in Move(state):
-        if new_state in path:
-            continue
-        else:
-            set_new_state[tuple(new_state)] = Q_value(new_state)
-    state = max(set_new_state,key=set_new_state.get) # lay state co Q_value lon nhat
-    print(state)
-    return Q_learning(state,path)
+        if tuple(new_state) in visited:
+            continue  # tránh lặp
+        set_new_state[tuple(new_state)] = Q_value(new_state)
+
+    if not set_new_state:
+        return path,0
+    best_state = max(set_new_state, key=set_new_state.get)
+    return Q_learning(list(best_state), path, depth+1, max_depth, visited)

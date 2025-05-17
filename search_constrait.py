@@ -23,18 +23,20 @@ def Constraint(array,i):
 def Check():
     time_start = time.time()
     list_state = random_list(362880)
-    for k in range(len(list_state)):
-        state = list_state[k]
+    count = 0
+    for state in list_state:
+        count += 1
         for i in range(len(state)-1):
             if Constraint(state,i)==False:
                 break
             if i == 7:
                 time_execute = round(time.time() - time_start,4)
-                print(f'So lan thu de thanh cong:{k}')
-                print(f"thoi gian den lan thu thanh cong: {time_execute}")
-                return 1
-    return None
-
+                with open("cps.txt","a") as f:
+                    f.write(f'thuat toan Check\n')
+                    f.write(f'So lan thu de thanh cong:{count}\n')
+                    f.write(f"thoi gian den lan thu thanh cong: {time_execute}\n")
+                return [],time_execute
+    return [],time_execute
 
 start_state = [None]*9
 set_value = [1,5,4,3,2,"",7,6,8]
@@ -56,8 +58,9 @@ def Backtracking(i, set_value, state):
                 f.write(f"{state}\n") 
         state[i] = None  # reset vị trí i khi không hợp lệ
     return None 
-
-#Backtracking(0,set_value,start_state)
+# with open("cps.txt","a") as f:
+#     f.write(f'thuat toan BackTracking\n')
+# Backtracking(0,set_value,start_state)
 # start_state = [None]*9
 set_value = tuple([5,4,3,2,"",7,6,1,8])
 def AC3(xi,state,tried,set_value):
@@ -80,3 +83,7 @@ def AC3(xi,state,tried,set_value):
     with open("cps.txt","a") as f:
                 f.write(f"{state}\n")
     return AC3(xi=0,state=[None]*9,tried=tried,set_value=set_value)
+
+# with open("cps.txt","a") as f:
+#     f.write(f'thuat toan AC3\n')
+# AC3(0,start_state,[],set_value)
