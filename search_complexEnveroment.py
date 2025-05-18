@@ -97,11 +97,11 @@ def partial_observe():
                 f.write(f"So lan duyet: {len(visited)}\n")
                 f.write(f"Path: {path}")
                 f.write("\n")
-            return 1
+            return None,None
         for new_state in Move(state_current):
             if Filter(new_state) and (tuple(new_state) not in visited):
                 queue.append([new_state, path + [state_current]])
-    return None
+    return None,None
 
 #partial_observe()
 
@@ -124,11 +124,8 @@ def non_observe():
                 f.write(f"So lan duyet: {len(visited)}\n")
                 f.write(f"Path: {path}")
                 f.write("\n")
-            return 1
+            return None,None
         for new_state in Move(state_current):
             if tuple(new_state) not in visited:
                 queue.append([new_state, path + [state_current]])
-    return None
-
-
-non_observe()
+    return None,None

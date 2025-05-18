@@ -1,6 +1,3 @@
-import math
-import time
-import random
 from search_nonInformation import *
 from search_Information import *
 from search_local import *
@@ -16,23 +13,29 @@ def Excute_algorithm(name_algorithm, start_state, goal_state):
         return None
     elif not is_solvable(start_state):
         return None
+
     algorithms = {
-    'BFS': BFS(start_state, goal_state),               # Breadth-First Search
-    'DFS': DFS(start_state, goal_state),               # Depth-First Search
-    'UCS': UCS(start_state, goal_state),  
-    'IDS': IDS(start_state, goal_state, max_depth=1000), # Iterative Deepening Search             # Uniform Cost Search
-    'GREEDY': GreedySearch(start_state, goal_state),   # Greedy Best-First Search
-    'A*': AStar(start_state, goal_state),              # A* Search
-    'IDA*': IDA(start_state, goal_state),              # Iterative Deepening A*
-    'SHC': SHC(start_state, goal_state),               # Steepest Hill Climbing
-    'SAHC': SAHC(start_state, goal_state),             # Stochastic Steepest-Ascent Hill Climbing
-    'STHB': STHB(start_state, goal_state),             # Simulated Threshold Beam (hoặc có thể là Stochastic Hill Beam - cần xem định nghĩa)          # Simulated Annealing
-    'BEAM': BeamSearch(start_state, goal_state, beam_width=3), # Beam Search
-    'GA': genetic_algorithm(start_state, goal_state),  # Genetic Algorithm
-    'And-Or': AndOrSearch(start_state, goal_state),    # And-Or Graph Search
-    'QLearning':Q_learning(start_state,[],0,100)
+    'BFS': lambda: BFS(start_state, goal_state),
+    'DFS': lambda: DFS(start_state, goal_state),
+    'UCS': lambda: UCS(start_state, goal_state),
+    'IDS': lambda: IDS(start_state, goal_state, max_depth=1000),
+    'GREEDY': lambda: GreedySearch(start_state, goal_state),
+    'A*': lambda: AStar(start_state, goal_state),
+    'IDA*': lambda: IDA(start_state, goal_state),
+    'SHC': lambda: SHC(start_state, goal_state),
+    'SAHC': lambda: SAHC(start_state, goal_state),
+    'STHB': lambda: STHB(start_state, goal_state),
+    'BEAM': lambda: BeamSearch(start_state, goal_state, beam_width=3),
+    'GA': lambda: genetic_algorithm(start_state, goal_state),
+    'And-Or': lambda: AndOrSearch(start_state, goal_state),
+    'Par_Obs': lambda: partial_observe(),
+    'Non_Obs': lambda: non_observe(),
+    'Check': lambda: Check(),
+    'Backtrack': lambda: Backtracking(0, [1, 5, 4, 3, 2, "", 7, 6, 8], [None]*9),
+    'AC3': lambda: AC3(0, [None]*9, [], tuple([1, 5, 4, 3, 2, "", 7, 6, 8])),
+    'QLearning': lambda: Q_learning(start_state, [], 0, 100)
     }
-    path,time_execute = algorithms[name_algorithm]
+    path,time_execute = algorithms[name_algorithm]()
     return path,time_execute
 
 

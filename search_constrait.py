@@ -35,8 +35,8 @@ def Check():
                     f.write(f'thuat toan Check\n')
                     f.write(f'So lan thu de thanh cong:{count}\n')
                     f.write(f"thoi gian den lan thu thanh cong: {time_execute}\n")
-                return [],time_execute
-    return [],time_execute
+                return None,None
+    return None,None
 
 start_state = [None]*9
 set_value = [1,5,4,3,2,"",7,6,8]
@@ -44,7 +44,7 @@ def Backtracking(i, set_value, state):
     if i > 8:
         with open("cps.txt","a") as f:
                 f.write(f"{state}\n")
-        return state
+        return None,None
     
     for value in list(set_value):  # tạo bản sao để duyệt an toàn
         state[i] = value
@@ -57,18 +57,15 @@ def Backtracking(i, set_value, state):
         with open("cps.txt","a") as f:
                 f.write(f"{state}\n") 
         state[i] = None  # reset vị trí i khi không hợp lệ
-    return None 
-# with open("cps.txt","a") as f:
-#     f.write(f'thuat toan BackTracking\n')
-# Backtracking(0,set_value,start_state)
-# start_state = [None]*9
+    return None,None
+
 set_value = tuple([5,4,3,2,"",7,6,1,8])
 def AC3(xi,state,tried,set_value):
     #new_tried = tried
     if xi>8:
         with open("cps.txt","a") as f:
                 f.write(f"{state}\n")
-        return state
+        return None,None
     for value in list(set_value):
         if xi == 0:
             if value in tried:
