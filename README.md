@@ -3,6 +3,7 @@
 ## 1. Mục tiêu
 Thuật toán tìm kiếm là một trong những thuật toán nền tảng và cốt lõi trong lĩnh vực trí tuệ nhân tạo.
 Để củng cố và vận dụng linh hoạt những kiến thức đã học. Với yêu cầu, xây dụng một chương trình giải bài toán 8-Puzzle.
+
 **Các mục tiêu đề ra:**
 - Xây dựng một chương trình có giao diện dễ sử dụng
 - Áp dụng đầy đủ các thuật toán tìm kiếm
@@ -16,7 +17,7 @@ Thuật toán tìm kiếm là một trong những thuật toán nền tảng và
 - Trạng thái xuất phát: [1,2,3,5,4,6,0,8,7]
 - Trạng thái mục tiêu: [1,2,3,4,5,6,7,8,0]
 - Chi phí: mỗi hành động có giá = 1
-- Solution: Sử dụng cấu trúc queue, stack để lưu trữ trạng thái mở rông. Duyệt qua từng trạng thái đến khi tìm thấy trạng thái mục tiêu.
+- Solution: Sử dụng cấu trúc queue, stack để lưu trữ trạng thái mở rộng. Duyệt qua từng trạng thái đến khi tìm thấy trạng thái mục tiêu.
 
 #### - 2.1.1. BFS
 ![alt text](anh_gif/bfs.gif)
@@ -113,10 +114,10 @@ Beam: lưu tập giới hạn các trạng thái tốt nhất ở mỗi cấp, g
 #### - 2.4.1. Non-Observe
 ![alt text](anh_tinh/non_obsebve1.png)
 ![alt text](anh_tinh/non_observe2.png)
-- 2.4.2. Partial-Observe
+#### - 2.4.2. Partial-Observe
 ![alt text](anh_tinh/partial_observe.png)
 ![alt text](anh_tinh/partial_observe2.png)
-- 2.4.3. AndOr
+#### - 2.4.3. AndOr
 ![alt text](anh_gif/andor.gif)
 
 **Nhận xét:** Không giống như các thuật toán ở trên, tìm kiếm trong môi trường phức tạp không có chính xác trạng thái ban đầu, trạng thái đích mà dựa vào tập trạng thái niềm tin, vì thế không gian trạng thái vô cùng lớn.
