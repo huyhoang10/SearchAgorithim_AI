@@ -207,7 +207,7 @@ while running:
     pg.display.update()
     frame_count += 1
     filename = f"ga/frame_{frame_count:03d}.png"  # frame_000.png, frame_001.png, ...
-    pg.image.save(screen, filename)
+    #pg.image.save(screen, filename)
     pg.time.wait(300)
 pg.display.quit()
 
